@@ -451,6 +451,39 @@ function initCode(){
   });
 }
 
+function initMobileMenu(){
+  const burger = document.getElementById('btn-burger');
+  const headerActions = document.getElementById('header-actions');
+  const overlay = document.getElementById('mobile-overlay');
+  
+  if (!burger || !headerActions || !overlay) return;
+  
+  const toggleMenu = () => {
+    const isOpen = headerActions.classList.contains('show');
+    if (isOpen) {
+      headerActions.classList.remove('show');
+      overlay.classList.remove('show');
+    } else {
+      headerActions.classList.add('show');
+      overlay.classList.add('show');
+    }
+  };
+  
+  burger.addEventListener('click', toggleMenu);
+  overlay.addEventListener('click', toggleMenu);
+  
+  // Close menu when clicking any button inside
+  headerActions.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Small delay to let the action complete
+      setTimeout(() => {
+        headerActions.classList.remove('show');
+        overlay.classList.remove('show');
+      }, 100);
+    });
+  });
+}
+
 async function main(){
   initTabs();
   initExport();
@@ -458,6 +491,7 @@ async function main(){
   initSettings();
   initNewSession();
   initCode();
+  initMobileMenu();
   initSpeech(els.btnMic, els.chatText);
   await initMermaid();
   // UI Theme

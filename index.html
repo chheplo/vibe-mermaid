@@ -17,7 +17,8 @@
           <span class="logo">◆</span>
           <h1>Vibe Mermaid</h1>
         </div>
-        <div class="header-actions">
+        <button id="btn-burger" class="icon-btn burger-menu" title="Menu">☰</button>
+        <div class="header-actions" id="header-actions">
           <div class="menu" title="New Session">
             <button id="btn-new" class="btn subtle">New</button>
             <div class="menu-items" id="new-menu" hidden>
@@ -57,6 +58,7 @@
           </div>
           <button id="btn-settings" class="btn primary">Settings</button>
         </div>
+        <div class="mobile-overlay" id="mobile-overlay"></div>
       </header>
 
       <main class="layout">
@@ -68,7 +70,7 @@
           <div class="chat-input">
             <button id="btn-mic" class="icon-btn" title="Voice input">🎤</button>
             <textarea id="chat-text" placeholder="Describe or ask to update the diagram..." rows="2"></textarea>
-            <button id="btn-send" class="btn primary">Send</button>
+            <button id="btn-send" class="btn primary"><span class="send-text">Send</span><span class="send-icon">➤</span></button>
           </div>
         </aside>
 

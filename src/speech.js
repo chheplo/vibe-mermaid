@@ -18,9 +18,32 @@ export function initSpeech(btnMic, inputEl){
   function showIndicator(){
     if (indicator) return;
     indicator = document.createElement('div');
-    indicator.className = 'listening-indicator';
-    indicator.innerHTML = '<span class="dot"></span> Listening… <span class="hint">click to stop</span>';
+    indicator.className = 'listening-overlay';
+    indicator.innerHTML = `
+      <div class="listening-content">
+        <div class="listening-animation">
+          <span class="wave"></span>
+          <span class="wave"></span>
+          <span class="wave"></span>
+          <span class="wave"></span>
+          <span class="wave"></span>
+        </div>
+        <div class="listening-text">Listening...</div>
+        <button class="listening-stop">Stop</button>
+      </div>
+    `;
     container.appendChild(indicator);
+    
+    // Add stop button handler
+    const stopBtn = indicator.querySelector('.listening-stop');
+    if (stopBtn) {
+      stopBtn.addEventListener('click', () => {
+        active = false; 
+        try{ rec.stop(); }catch{} 
+        btnMic.textContent='🎤'; 
+        hideIndicator();
+      });
+    }
   }
   function hideIndicator(){ if (indicator){ indicator.remove(); indicator = null; } }
 
@@ -54,8 +77,4 @@ export function initSpeech(btnMic, inputEl){
     } catch {}
   });
 
-  // Allow clicking the indicator to stop
-  document.addEventListener('click', (e) => {
-    if (indicator && indicator.contains(e.target)){ active = false; try{ rec.stop(); }catch{} btnMic.textContent='🎤'; hideIndicator(); }
-  });
 }
