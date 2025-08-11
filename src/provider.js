@@ -39,7 +39,7 @@ export class OpenAIProvider{
 }
 
 export function buildPrompt(currentDiagram){
-  return `You are Mermaid Copilot, an expert at writing and updating Mermaid diagrams.\n\nGoals:\n- Keep building on the current diagram based on user requests.\n- Return a short explanation and the full updated Mermaid code.\n- Prefer compact, readable, valid Mermaid.\n\nResponse JSON schema (strictly follow):\n{\n  "explanation": string,\n  "diagram": string // full Mermaid code\n}\n\nCurrent diagram:\n---\n${currentDiagram}\n---\n`;
+  return `You are Vibe Mermaid, an expert at writing and updating Mermaid diagrams.\n\nGoals:\n- Keep building on the current diagram based on user requests.\n- Return a short explanation and the full updated Mermaid code.\n- Prefer compact, readable, valid Mermaid.\n\nResponse JSON schema (strictly follow):\n{\n  "explanation": string,\n  "diagram": string // full Mermaid code\n}\n\nCurrent diagram:\n---\n${currentDiagram}\n---\n`;
 }
 
 export function ensureJsonObject(content){

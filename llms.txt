@@ -1,10 +1,10 @@
-# Mermaid Copilot
+# Vibe Mermaid
 
 A web-based diagram editor with AI chat integration that renders Mermaid diagrams and custom mindmaps.
 
 ## Project Overview
 
-Mermaid Copilot is an interactive diagram creation tool that combines the power of Mermaid.js with AI-assisted diagram generation and a custom D3.js-based mindmap renderer. Users can create flowcharts, mindmaps, and other diagrams through natural language conversation with an AI assistant or by directly editing diagram code.
+Vibe Mermaid is an interactive diagram creation tool that combines the power of Mermaid.js with AI-assisted diagram generation and a custom D3.js-based mindmap renderer. Users can create flowcharts, mindmaps, and other diagrams through natural language conversation with an AI assistant or by directly editing diagram code.
 
 ## Key Features
 

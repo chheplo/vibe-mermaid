@@ -119,8 +119,22 @@ async function handleSend(){
     ...state.messages,
   ];
 
-  const thinking = 'Thinking…';
-  addMessage('assistant', thinking);
+  // Add loading message with animated dots
+  const loadingRow = document.createElement('div');
+  loadingRow.className = 'msg assistant loading';
+  const roleEl = document.createElement('div');
+  roleEl.className = 'role';
+  roleEl.textContent = '🤖';
+  const bubble = document.createElement('div');
+  bubble.className = 'bubble loading-bubble';
+  bubble.innerHTML = '<div class="loading-spinner"></div><span class="loading-text">Thinking...</span>';
+  loadingRow.append(roleEl, bubble);
+  els.chatLog.appendChild(loadingRow);
+  els.chatLog.scrollTop = els.chatLog.scrollHeight;
+
+  // Disable send button during processing
+  els.btnSend.disabled = true;
+  els.chatText.disabled = true;
 
   try {
     const resp = await state.provider.chat(state.settings.model, messages);
@@ -143,20 +157,20 @@ async function handleSend(){
     ensureZoomContent();
     applyZoomTransform();
 
-    // Replace the last assistant placeholder with explanation
-    const last = els.chatLog.lastElementChild;
-    if (last && last.classList.contains('assistant')){
-      last.querySelector('.bubble').innerText = explanation;
-      state.messages[state.messages.length-1].content = explanation;
-    }
+    // Remove loading message and add actual response
+    loadingRow.remove();
+    addMessage('assistant', explanation);
 
   } catch (err){
     console.error(err);
-    const last = els.chatLog.lastElementChild;
-    if (last && last.classList.contains('assistant')){
-      last.querySelector('.bubble').innerText = 'Error: ' + (err.message || err);
-      state.messages[state.messages.length-1].content = 'Error.';
-    }
+    // Remove loading message and show error
+    loadingRow.remove();
+    addMessage('assistant', 'Error: ' + (err.message || err));
+  } finally {
+    // Re-enable inputs
+    els.btnSend.disabled = false;
+    els.chatText.disabled = false;
+    els.chatText.focus();
   }
 }
 

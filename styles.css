@@ -94,6 +94,36 @@ body{
 .listening-indicator .hint{ color: var(--muted); font-size: 12px; }
 @keyframes pulse{ 0%{ box-shadow: 0 0 0 0 rgba(239,68,68,.7);} 70%{ box-shadow: 0 0 0 8px rgba(239,68,68,0);} 100%{ box-shadow: 0 0 0 0 rgba(239,68,68,0);} }
 
+/* Loading animation */
+.loading-bubble {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(124, 92, 255, 0.2);
+  border-top-color: #7c5cff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.loading-text {
+  color: var(--muted);
+  animation: pulse-text 1.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-text {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
 .work-pane{ padding: 10px; display:flex; flex-direction: column; overflow: hidden; }
 .tabs{ display:flex; gap: 6px; padding: 6px; align-items: center; }
 .tab{ cursor: pointer; padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: rgba(255,255,255,0.05); color: var(--fg); }

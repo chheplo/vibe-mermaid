@@ -1,8 +1,8 @@
-# Mermaid Copilot
+# Vibe Mermaid
 
 Create and edit diagrams through natural conversation. Just describe what you want, and watch your ideas transform into beautiful visualizations.
 
-![Mermaid Copilot Screenshot](screenshot.png)
+![Vibe Mermaid Screenshot](image.png)
 
 ## The Conversational Way to Create Diagrams
 
