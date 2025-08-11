@@ -1,130 +1,122 @@
 # Mermaid Copilot
 
-A lightweight, AI-powered diagram editor with zero build steps and no heavy frameworks. Pure HTML, CSS, and vanilla JavaScript.
+Create and edit diagrams through natural conversation. Just describe what you want, and watch your ideas transform into beautiful visualizations.
+
+![Mermaid Copilot Screenshot](screenshot.png)
+
+## The Conversational Way to Create Diagrams
+
+Instead of learning complex syntax or fighting with drawing tools, simply **talk to your diagrams**:
+
+- 🗣️ "Create a flowchart showing user login process"
+- 🗣️ "Add a decision node for email verification"
+- 🗣️ "Change the colors to match our brand"
+- 🗣️ "Make it a mindmap instead"
+
+Your diagrams evolve through natural conversation, making complex visualizations as easy as having a chat.
 
 ## Features
 
-- 🎨 **Dual Rendering System** - Mermaid.js for standard diagrams, custom D3.js for mindmaps
-- 🤖 **AI Chat Interface** - Generate and update diagrams through natural language
-- 🎯 **Custom Mindmap Renderer** - Beautiful aligned boxes with elbowed connectors
-- 🌈 **14 Built-in Themes** - From dark mode to cyberpunk
-- 📤 **Multiple Export Formats** - SVG, PNG, and Mermaid (.mmd) files
-- 🎤 **Voice Input** - Speak your diagram ideas
-- 🔍 **Zoom & Pan** - Smooth navigation for large diagrams
+- **🎤 Voice Input** - Click the mic and speak your diagram into existence
+- **💬 Natural Language** - No syntax to memorize, just describe what you want
+- **🔄 Iterative Editing** - Refine through conversation: "move that node left", "add an arrow here"
+- **🎨 Smart Suggestions** - The AI understands context and suggests improvements
+- **✨ Instant Preview** - See changes as you describe them
+- **🎯 Custom Mindmaps** - Beautiful hierarchical layouts with aligned boxes
 
-## Zero Dependencies Philosophy
+## Getting Started
 
-**No Node.js required. No npm. No build process. No webpack. No bundlers.**
+### 1. Open the App
 
-Just open `index.html` in your browser and start creating diagrams.
+No installation needed. Just open `index.html` in your browser or serve it locally:
 
-The only runtime dependencies are loaded from CDN:
-- Mermaid.js for diagram rendering
-- D3.js for custom mindmap visualization
-
-## Quick Start
-
-1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd mermaid-agent
-```
-
-2. Open in your browser:
-```bash
-# Using Python
 python3 -m http.server 8080
-
-# Or using any static file server
-# Or simply open index.html directly
 ```
 
-3. Add your OpenAI API key in Settings
+### 2. Add Your API Key
 
-## Project Structure
+Click **Settings** and add your OpenAI API key (or any OpenAI-compatible endpoint):
+- OpenAI API keys from [platform.openai.com](https://platform.openai.com)
+- Compatible with Azure OpenAI, Anthropic via proxy, or local LLMs
+- Your key stays in your browser (localStorage)
+
+### 3. Start Talking
+
+Click the **microphone** button or type in the chat:
 
 ```
-mermaid-agent/
-├── index.html           # Single HTML entry point
-├── styles.css           # All styling, no preprocessors
-├── src/
-│   ├── app.js          # Main application logic
-│   ├── mermaid.js      # Mermaid integration
-│   ├── mindmap-renderer.js  # Custom D3 mindmap
-│   ├── provider.js     # AI provider interface
-│   └── speech.js       # Voice input handling
-└── README.md
+You: Create a mindmap about project planning
+AI: I'll create a project planning mindmap for you...
+You: Add risk management as a main branch
+AI: I've added risk management to your mindmap...
+You: Include mitigation strategies under risks
+AI: Updated with mitigation strategies...
 ```
 
-## Supported Diagrams
+## Voice Commands Examples
 
-### Standard Mermaid Diagrams
+### Creating Diagrams
+- "Create a flowchart for user registration"
+- "Make a mindmap about machine learning"
+- "Draw a sequence diagram for API authentication"
+
+### Editing and Refining
+- "Change the start node color to blue"
+- "Add a branch for error handling"
+- "Connect the login node to dashboard"
+- "Make the text bigger"
+- "Simplify this diagram"
+
+### Transforming
+- "Convert this to a mindmap"
+- "Turn it into a sequence diagram"
+- "Make it horizontal instead of vertical"
+
+## Supported Diagram Types
+
+All Mermaid diagram types plus enhanced mindmaps:
 - Flowcharts
+- Mindmaps (with custom renderer)
 - Sequence diagrams
-- Gantt charts
 - Class diagrams
 - State diagrams
-- Entity relationship diagrams
-- User journey maps
+- Entity relationships
+- Gantt charts
 - Git graphs
-- Pie charts
+- And more...
 
-### Custom Mindmap (Enhanced)
-```mermaid
-mindmap
-  root((Your Idea))
-    Branch 1
-      Sub-item 1
-      Sub-item 2
-    Branch 2
-      Sub-item 3
-      Sub-item 4
-```
+## Export Your Work
 
-## Customization
+- **PNG** - High-resolution images
+- **SVG** - Scalable vectors
+- **MMD** - Mermaid source code
 
-### Adding Themes
-Edit the theme presets in `app.js`:
-```javascript
-const presets = {
-  yourTheme: { 
-    theme: 'dark', 
-    themeVariables: { 
-      primaryColor: '#...', 
-      // ...
-    }
-  }
-};
-```
+## Zero Build Philosophy
 
-### Modifying AI Prompts
-Update the system prompt in `provider.js` to customize diagram generation behavior.
+Pure HTML, CSS, and JavaScript. No npm, no webpack, no build steps. Just open and use.
 
-## Browser Support
+## Browser Requirements
 
-Works in all modern browsers with ES6 support:
-- Chrome/Edge 88+
-- Firefox 78+
-- Safari 14+
+Any modern browser with:
+- ES6 support
+- Web Speech API (for voice input)
+- LocalStorage (for settings)
 
-## Philosophy
+## Privacy
 
-This project proves you don't need complex build systems or heavy frameworks to create powerful web applications. With modern browser APIs and a few carefully chosen libraries loaded from CDN, you can build sophisticated tools that are:
+- Your API key never leaves your browser
+- All processing happens between your browser and your AI provider
+- No telemetry, no tracking, no data collection
 
-- **Fast** - No bundling overhead
-- **Simple** - Direct file editing, instant refresh
-- **Debuggable** - Source maps not needed, code is the source
-- **Portable** - Works anywhere a browser runs
-- **Maintainable** - Clear file structure, no magic
+## Contributing
+
+Keep it conversational. Keep it simple. No build tools.
 
 ## License
 
 MIT
 
-## Contributing
-
-Keep it simple. If it requires a build step, it doesn't belong here.
-
 ---
 
-*Built with vanilla JavaScript and a focus on simplicity.*
+*Because creating diagrams should be as natural as having a conversation.*
