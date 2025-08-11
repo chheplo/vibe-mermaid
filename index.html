@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mermaid Copilot</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/d3@7.8.5/dist/d3.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <header class="app-header glass">
+        <div class="brand">
+          <span class="logo">◆</span>
+          <h1>Mermaid Copilot</h1>
+        </div>
+        <div class="header-actions">
+          <div class="menu" title="New Session">
+            <button id="btn-new" class="btn subtle">New</button>
+            <div class="menu-items" id="new-menu" hidden>
+              <button class="menu-item" data-template="empty">Empty</button>
+              <button class="menu-item" data-template="diagram">Diagram (Flowchart)</button>
+              <button class="menu-item" data-template="mindmap">Mindmap</button>
+            </div>
+          </div>
+          <button id="btn-ui-theme" class="icon-btn" title="Toggle UI theme">🌙</button>
+          <div class="menu" title="Mermaid theme">
+            <button id="btn-theme" class="btn">Theme</button>
+            <div class="menu-items" id="theme-menu" hidden>
+              <button class="menu-item" data-theme="dark">Dark</button>
+              <button class="menu-item" data-theme="default">Default</button>
+              <button class="menu-item" data-theme="forest">Forest</button>
+              <button class="menu-item" data-theme="neutral">Neutral</button>
+              <button class="menu-item" data-theme="slate">Slate</button>
+              <button class="menu-item" data-theme="ocean">Ocean</button>
+              <button class="menu-item" data-theme="emerald">Emerald</button>
+              <button class="menu-item" data-theme="sunset">Sunset</button>
+              <button class="menu-item" data-theme="rose">Rose</button>
+              <button class="menu-item" data-theme="cyberpunk">Cyberpunk</button>
+              <button class="menu-item" data-theme="grayscale">Grayscale</button>
+              <button class="menu-item" data-theme="highcontrast">High Contrast</button>
+              <button class="menu-item" data-theme="pastel">Pastel</button>
+              <button class="menu-item" data-theme="halloween">Halloween</button>
+            </div>
+          </div>
+          <input id="diagram-name" class="name-field" type="text" placeholder="diagram" title="Filename base for exports" />
+          <div class="menu">
+            <button id="btn-export" class="btn">Export</button>
+            <div class="menu-items" id="export-menu" hidden>
+              <button data-action="save-mmd" class="menu-item">Save .mmd</button>
+              <button data-action="export-svg" class="menu-item">Export SVG</button>
+              <button data-action="export-png" class="menu-item">Export PNG</button>
+            </div>
+          </div>
+          <button id="btn-settings" class="btn primary">Settings</button>
+        </div>
+      </header>
+
+      <main class="layout">
+        <aside class="chat-pane glass" id="chat-pane">
+          <div class="chat-header">
+            <h2>Copilot Chat</h2>
+          </div>
+          <div id="chat-status" class="chat-status"></div>
+          <div id="chat-log" class="chat-log"></div>
+          <div class="chat-input">
+            <button id="btn-mic" class="icon-btn" title="Voice input">🎤</button>
+            <textarea id="chat-text" placeholder="Describe or ask to update the diagram..." rows="2"></textarea>
+            <button id="btn-send" class="btn primary">Send</button>
+          </div>
+        </aside>
+
+        <section class="work-pane glass">
+          <div class="tabs">
+            <button class="tab active" data-tab="preview">Preview</button>
+            <button class="tab" data-tab="code">Code</button>
+            <button id="btn-apply" class="tab-action" title="Run code">▶</button>
+          </div>
+          <div class="tab-content" id="tab-preview">
+            <div id="preview-container" class="preview"></div>
+            <div class="zoom-controls">
+              <button id="zoom-out" class="icon-btn" title="Zoom out">−</button>
+              <button id="zoom-in" class="icon-btn" title="Zoom in">+</button>
+              <button id="zoom-reset" class="icon-btn" title="Reset">↺</button>
+            </div>
+          </div>
+          <div class="tab-content hidden" id="tab-code">
+            <textarea id="code-editor" class="code" spellcheck="false"></textarea>
+          </div>
+        </section>
+      </main>
+
+      <!-- Settings Modal -->
+      <dialog id="settings-modal" class="modal glass">
+        <form method="dialog" class="settings-form">
+          <h3>Settings</h3>
+          <label>
+            Provider
+            <select id="provider">
+              <option value="openai">OpenAI-compatible</option>
+            </select>
+          </label>
+          <label>
+            API Base URL
+            <input id="api-base" type="text" placeholder="https://api.openai.com/v1" />
+          </label>
+          <label>
+            API Key
+            <input id="api-key" type="password" placeholder="sk-..." />
+          </label>
+          <label>
+            Model
+            <input id="model" type="text" placeholder="gpt-4o-mini" />
+          </label>
+          <div class="settings-actions">
+            <button value="cancel" class="btn subtle">Close</button>
+            <button id="btn-save-settings" value="default" class="btn primary">Save</button>
+          </div>
+          <p class="disclaimer">Your key is stored locally in this browser only.</p>
+        </form>
+      </dialog>
+    </div>
+
+    <script type="module" src="./src/app.js"></script>
+  </body>
+  </html>

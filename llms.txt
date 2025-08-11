@@ -1,0 +1,151 @@
+# Mermaid Copilot
+
+A web-based diagram editor with AI chat integration that renders Mermaid diagrams and custom mindmaps.
+
+## Project Overview
+
+Mermaid Copilot is an interactive diagram creation tool that combines the power of Mermaid.js with AI-assisted diagram generation and a custom D3.js-based mindmap renderer. Users can create flowcharts, mindmaps, and other diagrams through natural language conversation with an AI assistant or by directly editing diagram code.
+
+## Key Features
+
+- **AI Chat Interface**: Natural language diagram generation and modification using OpenAI-compatible APIs
+- **Dual Renderer System**: Standard Mermaid.js for most diagram types, custom D3.js renderer for mindmaps
+- **Multiple Diagram Types**: Flowcharts, mindmaps, sequence diagrams, and other Mermaid-supported formats
+- **Theme System**: 14 built-in themes including dark, light, and custom color schemes (slate, ocean, cyberpunk, etc.)
+- **Interactive Controls**: Zoom/pan, code editor, preview tabs, export functionality
+- **Export Options**: SVG, PNG, and .mmd file formats
+- **Voice Input**: Speech-to-text for hands-free diagram description
+- **Template System**: Pre-built templates for empty, flowchart, and mindmap diagrams
+
+## Architecture
+
+### Core Files Structure
+
+**Main Application Layer:**
+- `/index.html` - UI structure with header controls, chat interface, preview/code tabs, and settings modal
+- `/src/app.js` - Main application logic, state management, UI event handlers, and zoom controls
+- `/styles.css` - Complete styling with dark/light themes and glassmorphism design
+
+**Rendering Layer:**
+- `/src/mermaid.js` - Mermaid integration with dual renderer system and theme management
+- `/src/mindmap-renderer.js` - Custom D3.js mindmap renderer with balanced tree layout and interactive features
+
+**Integration Layer:**
+- `/src/provider.js` - OpenAI-compatible API provider with JSON response parsing
+- `/src/speech.js` - Web Speech API integration for voice input
+
+### Application State
+
+The app maintains persistent state including:
+- User settings (API credentials, model configuration)
+- Current diagram code and type
+- Chat conversation history
+- Theme preferences (UI and Mermaid themes)
+- Diagram naming for exports
+
+### Dual Rendering System
+
+**Standard Mermaid Renderer:**
+- Handles flowcharts, sequence diagrams, class diagrams, etc.
+- Uses Mermaid.js v10 with configurable themes
+- Supports standard Mermaid syntax and features
+
+**Custom Mindmap Renderer:**
+- Built with D3.js for enhanced mindmap visualization
+- Features balanced tree layout with aligned node positioning
+- Supports custom syntax extensions (tools annotations)
+- Interactive zoom, pan, and hover tooltips
+- Color-coded depth levels with professional styling
+
+## Technical Implementation
+
+### Dependencies
+
+**External Libraries:**
+- Mermaid.js v10 (CDN): Primary diagram rendering engine
+- D3.js v7 (CDN): Custom mindmap visualization
+
+**API Integration:**
+- OpenAI-compatible endpoints for chat completions
+- JSON response format for structured diagram updates
+- Local browser storage for settings persistence
+
+### Mindmap Syntax Extensions
+
+The custom mindmap renderer supports enhanced syntax:
+```
+mindmap
+  root((Central Topic))
+    (Category 1)
+      Item A - tools: specific tools
+      Item B
+    (Category 2)
+      Item C
+      Item D
+```
+
+### Theme System
+
+**UI Themes:**
+- Dark (default): Dark background with purple/cyan accents
+- Light: Light background with adjusted contrast
+
+**Mermaid Themes:**
+- 4 built-in Mermaid themes: default, dark, forest, neutral
+- 10 custom themes with tailored color palettes
+- Dynamic theme switching without page reload
+
+### Export Functionality
+
+**Supported Formats:**
+- .mmd: Raw Mermaid diagram code
+- SVG: Vector graphics with full styling
+- PNG: Raster image at 2x resolution for clarity
+
+## Development Guidelines
+
+### Adding New Diagram Types
+
+1. Check if Mermaid.js supports the diagram type natively
+2. For custom types, extend the rendering logic in `mermaid.js`
+3. Add appropriate syntax detection and routing
+4. Update export functionality if needed
+
+### Customizing Themes
+
+1. Add theme definition in `getMermaidPreset()` function in `app.js`
+2. Include in theme dropdown menu in `index.html`
+3. Test with various diagram types for consistency
+
+### Extending AI Integration
+
+1. Modify prompt engineering in `buildPrompt()` function in `provider.js`
+2. Update JSON response parsing in `ensureJsonObject()`
+3. Consider diagram-specific context and constraints
+
+### UI Modifications
+
+1. Follow glassmorphism design patterns established in `styles.css`
+2. Maintain responsive behavior across different screen sizes
+3. Ensure accessibility with proper focus management and keyboard navigation
+
+## Common Integration Patterns
+
+**Rendering Flow:**
+1. User input (chat/code) triggers diagram update
+2. `renderDiagram()` determines renderer type (Mermaid vs custom)
+3. Appropriate renderer processes code and updates DOM
+4. Zoom/pan state is maintained across renders
+
+**AI Interaction Pattern:**
+1. User message added to conversation history
+2. System prompt includes current diagram context
+3. API response parsed for explanation and diagram code
+4. New diagram rendered with visual feedback
+
+**State Persistence:**
+- Settings stored in localStorage with JSON serialization
+- Theme preferences maintained across sessions
+- Diagram naming preserved for export consistency
+
+This codebase is designed for extensibility while maintaining clean separation between rendering engines, AI integration, and user interface concerns.
