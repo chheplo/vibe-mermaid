@@ -41,6 +41,9 @@ const els = {
   fieldApiKey: document.getElementById('api-key'),
   fieldModel: document.getElementById('model'),
   btnSaveSettings: document.getElementById('btn-save-settings'),
+  btnToggleChat: document.getElementById('btn-toggle-chat'),
+  chatPane: document.getElementById('chat-pane'),
+  layout: document.querySelector('.layout'),
 };
 
 function saveSettings(s){ localStorage.setItem('mermaid_copilot_settings', JSON.stringify(s)); }
@@ -484,6 +487,27 @@ function initMobileMenu(){
   });
 }
 
+function saveChatToggle(collapsed){ localStorage.setItem('mermaid_copilot_chat_collapsed', collapsed ? 'true' : 'false'); }
+function loadChatToggle(){ return localStorage.getItem('mermaid_copilot_chat_collapsed') === 'true'; }
+
+function initChatToggle(){
+  if (!els.btnToggleChat || !els.chatPane || !els.layout) return;
+  
+  // Load saved state
+  const isCollapsed = loadChatToggle();
+  if (isCollapsed) {
+    els.chatPane.classList.add('collapsed');
+    els.layout.classList.add('chat-collapsed');
+  }
+  
+  // Toggle handler
+  els.btnToggleChat.addEventListener('click', () => {
+    const collapsed = els.chatPane.classList.toggle('collapsed');
+    els.layout.classList.toggle('chat-collapsed');
+    saveChatToggle(collapsed);
+  });
+}
+
 async function main(){
   initTabs();
   initExport();
@@ -492,6 +516,7 @@ async function main(){
   initNewSession();
   initCode();
   initMobileMenu();
+  initChatToggle();
   initSpeech(els.btnMic, els.chatText);
   await initMermaid();
   // UI Theme
