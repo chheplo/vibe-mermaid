@@ -25,6 +25,16 @@ Preferred communication style: Simple, everyday language.
 - Chat conversation history
 - Theme preferences (UI theme and Mermaid theme are independent)
 - Diagram naming for export operations
+- Chat sidebar collapse state
+
+**Chat Sidebar Toggle**:
+- Collapsible chat sidebar with toggle button for maximizing diagram workspace
+- Collapsed state reduces sidebar width from 360px to 48px
+- Toggle button (« icon) rotates 180° when collapsed, centered in collapsed state
+- Hover effects with purple tint and scale animation for better interactivity
+- State persists across sessions via localStorage (`mermaid_copilot_chat_collapsed`)
+- Responsive behavior: maintains single-column layout on screens ≤920px regardless of collapse state
+- Dynamic title attribute updates between "Collapse" and "Expand" for accessibility
 
 **Design Decisions**:
 - **Why vanilla JS**: Minimizes bundle size, eliminates build complexity, ensures instant loading
@@ -187,7 +197,9 @@ Preferred communication style: Simple, everyday language.
 
 **Client-Side Only**: No server-side database or backend. All data persists in browser localStorage with keys:
 - `mermaid_copilot_settings`: JSON object with API credentials and model selection
-- `mermaid_ui_theme`: String ('light' or 'dark')
-- `mermaid_theme`: String (Mermaid theme name)
+- `mermaid_copilot_ui_theme`: String ('light' or 'dark')
+- `mermaid_copilot_theme`: String (Mermaid theme name)
+- `mermaid_copilot_chat_collapsed`: String ('true' or 'false') for chat sidebar state
+- `mermaid_copilot_name`: String for diagram export filename
 
 **Privacy Implication**: User data never transmitted except API calls to configured chat endpoint. API keys visible to anyone with physical access to user's browser.
