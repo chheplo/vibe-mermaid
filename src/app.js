@@ -493,11 +493,20 @@ function loadChatToggle(){ return localStorage.getItem('mermaid_copilot_chat_col
 function initChatToggle(){
   if (!els.btnToggleChat || !els.chatPane || !els.layout) return;
   
+  const updateToggleButton = (collapsed) => {
+    if (collapsed) {
+      els.btnToggleChat.setAttribute('title', 'Expand chat sidebar');
+    } else {
+      els.btnToggleChat.setAttribute('title', 'Collapse chat sidebar');
+    }
+  };
+  
   // Load saved state
   const isCollapsed = loadChatToggle();
   if (isCollapsed) {
     els.chatPane.classList.add('collapsed');
     els.layout.classList.add('chat-collapsed');
+    updateToggleButton(true);
   }
   
   // Toggle handler
@@ -505,6 +514,7 @@ function initChatToggle(){
     const collapsed = els.chatPane.classList.toggle('collapsed');
     els.layout.classList.toggle('chat-collapsed');
     saveChatToggle(collapsed);
+    updateToggleButton(collapsed);
   });
 }
 
